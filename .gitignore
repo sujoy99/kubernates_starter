@@ -35,3 +35,6 @@ secrets.local.yaml
 # --- Logs ---
 *.log
 logs/
+
+# --- Scratch: GitHub issue drafts (not part of the shipped repo) ---
+.github/issue-drafts/
