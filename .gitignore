@@ -1,0 +1,37 @@
+# --- Java / Maven ---
+target/
+*.class
+*.jar
+!.mvn/wrapper/maven-wrapper.jar
+.mvn/timing.properties
+
+# --- IDE ---
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+*.code-workspace
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Kubernetes / kind ---
+kubeconfig*.yaml
+*.kubeconfig
+
+# --- Helm ---
+*.tgz
+Chart.lock
+
+# --- Env / secrets (never commit real secrets) ---
+.env
+.env.*
+*.local.yaml
+secrets.local.yaml
+
+# --- Logs ---
+*.log
+logs/
