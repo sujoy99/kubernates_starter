@@ -14,8 +14,7 @@ for what's currently in progress. See [ROADMAP.md](ROADMAP.md) Section 7 for the
 
 ## Quick start
 
-> Phases 1–2 are runnable today. Placeholder commands below show the shape of what's coming for
-> Phases 3–4.
+> Phases 1–3 are runnable today. The Phase 4+ commands below show the shape of what's coming next.
 
 ```bash
 # Phase 1+: run the app locally

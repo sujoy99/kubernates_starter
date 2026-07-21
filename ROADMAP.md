@@ -208,12 +208,12 @@ small and safe; why we never run as root. **Milestone:** the exact same app runs
 
 ---
 
-### Phase 3 — A local Kubernetes cluster
-- [ ] Create a `kind` cluster: `kind create cluster --name poc`
-- [ ] Understand `kubectl get nodes` (you now have a 1-node cluster)
-- [ ] Load your local image into kind: `kind load docker-image hello-service:0.1.0 --name poc`
-- [ ] **Tests:** `kubectl get nodes` shows `Ready`; `kubectl cluster-info` succeeds
-- [ ] **Docs:** `docs/phase-3-local-cluster.md`
+### Phase 3 — A local Kubernetes cluster  ✅
+- [x] Create a `kind` cluster: `kind create cluster --name poc`
+- [x] Understand `kubectl get nodes` (you now have a 1-node cluster)
+- [x] Load your local image into kind: `kind load docker-image hello-service:0.1.0 --name poc`
+- [x] **Tests:** `kubectl get nodes` shows `Ready`; `kubectl cluster-info` succeeds
+- [x] **Docs:** `docs/phase-3-local-cluster.md`
 
 **You'll learn:** what a cluster/node is, and the crucial gotcha that a local cluster can't see your
 local Docker images until you *load* them in. **Milestone:** `kubectl get nodes` shows a Ready node.
@@ -424,6 +424,6 @@ correct, well-understood, well-tested template you can reuse for real services.*
 ---
 
 ### Next step
-Phases 0–2 are complete: the repo scaffold, the Spring Boot app, and its Docker image all exist and
-pass their gates. Next up is **Phase 3** — spin up a local `kind` Kubernetes cluster and load the
-`hello-service:0.1.0` image into it.
+Phases 0–3 are complete: the repo scaffold, the Spring Boot app, its Docker image, and a local `kind`
+Kubernetes cluster (with the image loaded in) all exist and pass their gates. Next up is **Phase 4** —
+write `k8s/deployment.yaml` and `k8s/service.yaml` and get the app running as self-healing Pods.
