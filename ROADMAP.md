@@ -177,14 +177,14 @@ is checked.
 
 ---
 
-### Phase 1 — The Spring Boot microservice (no Docker yet)
-- [ ] Generate a minimal Spring Boot app (`web` + `actuator` dependencies)
-- [ ] One REST endpoint: `GET /api/hello` → returns a JSON greeting
-- [ ] Enable Actuator health endpoint: `GET /actuator/health`
-- [ ] Externalize config via `application.yml` (port, app name, a greeting message)
-- [ ] Run locally: `mvn spring-boot:run`, hit both endpoints in a browser
-- [ ] **Tests:** JUnit unit test for the greeting logic + `@SpringBootTest`/`MockMvc` test for `GET /api/hello`; `mvn test` green
-- [ ] **Docs:** `docs/phase-1-spring-boot-app.md`
+### Phase 1 — The Spring Boot microservice (no Docker yet)  ✅
+- [x] Generate a minimal Spring Boot app (`web` + `actuator` dependencies)
+- [x] One REST endpoint: `GET /api/hello` → returns a JSON greeting
+- [x] Enable Actuator health endpoint: `GET /actuator/health`
+- [x] Externalize config via `application.yml` (port, app name, a greeting message)
+- [x] Run locally: `mvn spring-boot:run`, hit both endpoints in a browser
+- [x] **Tests:** JUnit unit test for the greeting logic + `@SpringBootTest`/`MockMvc` test for `GET /api/hello`; `mvn test` green
+- [x] **Docs:** `docs/phase-1-spring-boot-app.md`
 
 **You'll learn:** what the app actually *does* before we wrap it in anything. **Milestone:** app runs on `http://localhost:8080`.
 

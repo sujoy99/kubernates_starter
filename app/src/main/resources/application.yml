@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: hello-service
+
+# Custom config for our own code (read by GreetingService).
+# Externalizing these means we can change them later via a Kubernetes
+# ConfigMap without rebuilding the Docker image (see Phase 5).
+app:
+  name: hello-service
+  greeting:
+    message: "Hello from Kubernetes!"
+
+# Actuator: only expose health and info over HTTP for now.
+# health -> used later as our Kubernetes liveness/readiness probe target.
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
