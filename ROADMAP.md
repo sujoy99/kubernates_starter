@@ -192,14 +192,14 @@ is checked.
 
 ---
 
-### Phase 2 — Dockerize it
-- [ ] Write a **multi-stage `Dockerfile`** (stage 1 builds the jar, stage 2 runs it on a slim JRE)
-- [ ] Run as a **non-root user** inside the container (security)
-- [ ] Add a `.dockerignore`
-- [ ] Build: `docker build -t hello-service:0.1.0 .`
-- [ ] Run: `docker run -p 8080:8080 hello-service:0.1.0` and confirm the endpoints work
-- [ ] **Tests:** smoke-test script (`docs`/`scripts`) that runs the container, polls `/actuator/health` until 200 OK or times out and fails loudly
-- [ ] **Docs:** `docs/phase-2-dockerize.md`
+### Phase 2 — Dockerize it  ✅
+- [x] Write a **multi-stage `Dockerfile`** (stage 1 builds the jar, stage 2 runs it on a slim JRE)
+- [x] Run as a **non-root user** inside the container (security)
+- [x] Add a `.dockerignore`
+- [x] Build: `docker build -t hello-service:0.1.0 .`
+- [x] Run: `docker run -p 8080:8080 hello-service:0.1.0` and confirm the endpoints work
+- [x] **Tests:** smoke-test script (`docs`/`scripts`) that runs the container, polls `/actuator/health` until 200 OK or times out and fails loudly
+- [x] **Docs:** `docs/phase-2-dockerize.md`
 
 **You'll learn:** the difference between an image and a container; why multi-stage builds keep images
 small and safe; why we never run as root. **Milestone:** the exact same app runs *inside a container*.
@@ -424,6 +424,6 @@ correct, well-understood, well-tested template you can reuse for real services.*
 ---
 
 ### Next step
-Phase 0 issue-filing is in progress. Once GitHub auth is confirmed, we'll create the Phase 0–10 issues,
-then scaffold the folders and generate the minimal Spring Boot service for **Phase 1** — build it, run
-it locally, write its tests, and confirm both endpoints before touching Docker.
+Phases 0–2 are complete: the repo scaffold, the Spring Boot app, and its Docker image all exist and
+pass their gates. Next up is **Phase 3** — spin up a local `kind` Kubernetes cluster and load the
+`hello-service:0.1.0` image into it.

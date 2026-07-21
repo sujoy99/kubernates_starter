@@ -14,8 +14,8 @@ for what's currently in progress. See [ROADMAP.md](ROADMAP.md) Section 7 for the
 
 ## Quick start
 
-> Not runnable yet — this section fills in as Phases 1–4 land. Placeholder commands below show the
-> shape of what's coming.
+> Phases 1–2 are runnable today. Placeholder commands below show the shape of what's coming for
+> Phases 3–4.
 
 ```bash
 # Phase 1+: run the app locally
@@ -26,6 +26,8 @@ curl http://localhost:8080/actuator/health
 # Phase 2+: build & run in Docker
 docker build -t hello-service:0.1.0 ./app
 docker run -p 8080:8080 hello-service:0.1.0
+# or run the full smoke-test gate in one shot:
+./scripts/smoke-docker.sh
 
 # Phase 3+: local Kubernetes cluster
 kind create cluster --name poc
