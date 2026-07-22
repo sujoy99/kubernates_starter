@@ -1,0 +1,19 @@
+# Service = a stable internal address + load balancer in front of the Pods.
+# Pods come and go and get a new IP every time; this gives callers one
+# unchanging DNS name ("hello-service") to hit instead.
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-service
+spec:
+  # ClusterIP = only reachable from inside the cluster (the default kind).
+  # Fine for now — we reach it via `kubectl port-forward` until Phase 6
+  # adds an Ingress for real external access.
+  type: ClusterIP
+  selector:
+    # Matches the Pod template's labels in deployment.yaml — this is how
+    # the Service finds which Pods to send traffic to.
+    app: hello-service
+  ports:
+    - port: 80
+      targetPort: 8080

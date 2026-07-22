@@ -222,15 +222,15 @@ local Docker images until you *load* them in. **Milestone:** `kubectl get nodes`
 
 ---
 
-### Phase 4 — First deployment to Kubernetes
-- [ ] Write `k8s/deployment.yaml` — 2 replicas, resource requests/limits, liveness & readiness probes (wired to `/actuator/health`)
-- [ ] Write `k8s/service.yaml` — a `ClusterIP` Service in front of the Pods
-- [ ] Validate before applying: `kubectl apply -f k8s/ --dry-run=client`
-- [ ] Apply: `kubectl apply -f k8s/`
-- [ ] Inspect: `kubectl get pods`, `kubectl describe pod`, `kubectl logs`
-- [ ] Reach it: `kubectl port-forward svc/hello-service 8080:80`
-- [ ] **Tests:** E2E smoke script — apply manifests, wait for `Ready` Pods, `curl` through the port-forward, assert 200; also kill a Pod and assert it's replaced within N seconds
-- [ ] **Docs:** `docs/phase-4-first-deployment.md`
+### Phase 4 — First deployment to Kubernetes  ✅
+- [x] Write `k8s/deployment.yaml` — 2 replicas, resource requests/limits, liveness & readiness probes (wired to `/actuator/health`)
+- [x] Write `k8s/service.yaml` — a `ClusterIP` Service in front of the Pods
+- [x] Validate before applying: `kubectl apply -f k8s/ --dry-run=client`
+- [x] Apply: `kubectl apply -f k8s/`
+- [x] Inspect: `kubectl get pods`, `kubectl describe pod`, `kubectl logs`
+- [x] Reach it: `kubectl port-forward svc/hello-service 8080:80`
+- [x] **Tests:** E2E smoke script — apply manifests, wait for `Ready` Pods, `curl` through the port-forward, assert 200; also kill a Pod and assert it's replaced within N seconds
+- [x] **Docs:** `docs/phase-4-first-deployment.md`
 
 **You'll learn:** the core K8s objects and the debugging trio (`get` / `describe` / `logs`) you'll use
 forever. **Milestone:** your app runs as 2 self-healing Pods; kill one and watch K8s recreate it.
@@ -424,6 +424,7 @@ correct, well-understood, well-tested template you can reuse for real services.*
 ---
 
 ### Next step
-Phases 0–3 are complete: the repo scaffold, the Spring Boot app, its Docker image, and a local `kind`
-Kubernetes cluster (with the image loaded in) all exist and pass their gates. Next up is **Phase 4** —
-write `k8s/deployment.yaml` and `k8s/service.yaml` and get the app running as self-healing Pods.
+Phases 0–4 are complete: the repo scaffold, the Spring Boot app, its Docker image, a local `kind`
+Kubernetes cluster, and the app running as 2 self-healing Pods behind a Service all exist and pass
+their gates. Next up is **Phase 5** — move config into a ConfigMap and a Secret, and prove you can
+change the greeting message with zero image rebuilds.

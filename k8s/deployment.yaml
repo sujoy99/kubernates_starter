@@ -1,0 +1,74 @@
+# Deployment = "keep N healthy copies of this Pod running, always."
+# It creates a ReplicaSet under the hood, which is what actually watches
+# the Pod count and recreates any that die. You'll rarely touch the
+# ReplicaSet directly — the Deployment is the object you manage.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-service
+  labels:
+    app: hello-service
+spec:
+  replicas: 2
+  selector:
+    # How the Deployment finds "its" Pods among all Pods in the cluster.
+    # Must match metadata.labels in the Pod template below exactly.
+    matchLabels:
+      app: hello-service
+  template:
+    metadata:
+      labels:
+        app: hello-service
+    spec:
+      containers:
+        - name: hello-service
+          # Loaded into kind in Phase 3 via `kind load docker-image`.
+          # imagePullPolicy below stops kubelet from trying (and failing)
+          # to pull this tag from a public registry.
+          image: hello-service:0.1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+
+          # Resource requests/limits: the scheduler uses "requests" to
+          # decide which node can fit this Pod; "limits" caps what the
+          # container can actually consume. Small numbers here because
+          # this is a tiny demo app, not a sizing recommendation.
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 384Mi
+
+          # Readiness: "can this Pod receive traffic yet?" Until this
+          # passes, the Service (below) won't send it any requests —
+          # important during startup so we don't 502 real users.
+          # initialDelaySeconds is generous because a CPU *limit* (above)
+          # throttles the JVM during class-loading/Spring context startup
+          # far more than running it unconstrained locally — see the
+          # "Common errors & fixes" section in docs/phase-4-first-deployment.md.
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            failureThreshold: 6
+
+          # Liveness: "is this Pod still healthy, or should Kubernetes
+          # kill and replace it?" A stuck/deadlocked JVM that still
+          # accepts TCP but never responds would fail this and get
+          # restarted automatically. initialDelaySeconds must clear the
+          # same slow-start window as readiness, or kubelet kills the
+          # container mid-boot, forever restarting it before it ever
+          # gets a chance to become Ready (a startupProbe is the proper
+          # long-term fix for this — introduced in Phase 7).
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 45
+            periodSeconds: 10
+            failureThreshold: 3
