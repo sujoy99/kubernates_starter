@@ -1,0 +1,13 @@
+# ConfigMap = non-secret configuration kept OUTSIDE the image, so changing
+# a setting is "edit this + restart the rollout", not "rebuild and re-push
+# a Docker image". Keys here are plain env var names because Spring Boot's
+# relaxed binding maps them straight onto existing @Value properties in
+# application.yml — e.g. APP_GREETING_MESSAGE overrides app.greeting.message.
+# No app code change was needed to make this work.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hello-service-config
+data:
+  APP_GREETING_MESSAGE: "Hello from a ConfigMap — zero rebuilds needed!"
+  LOGGING_LEVEL_ROOT: "INFO"

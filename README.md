@@ -14,7 +14,7 @@ for what's currently in progress. See [ROADMAP.md](ROADMAP.md) Section 7 for the
 
 ## Quick start
 
-> Phases 1–4 are runnable today. The Phase 5+ commands below show the shape of what's coming next.
+> Phases 1–5 are runnable today. The Phase 6+ commands below show the shape of what's coming next.
 
 ```bash
 # Phase 1+: run the app locally
@@ -38,6 +38,12 @@ kubectl get pods
 kubectl port-forward svc/hello-service 8080:80
 # or run the full E2E gate (apply, wait for Ready, curl, kill a Pod, confirm self-heal):
 ./scripts/smoke-k8s.sh
+
+# Phase 5+: change config with zero image rebuilds
+kubectl edit configmap hello-service-config
+kubectl rollout restart deployment/hello-service
+# or run the full regression gate (change ConfigMap, restart, assert new value + no rebuild):
+./scripts/config-regression.sh
 ```
 
 ## Docs

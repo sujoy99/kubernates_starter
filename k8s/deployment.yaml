@@ -30,6 +30,25 @@ spec:
           ports:
             - containerPort: 8080
 
+          # envFrom dumps every key in the ConfigMap in as an env var.
+          # Spring Boot's relaxed binding then maps APP_GREETING_MESSAGE
+          # and LOGGING_LEVEL_ROOT onto app.greeting.message and
+          # logging.level.root automatically — see k8s/configmap.yaml.
+          envFrom:
+            - configMapRef:
+                name: hello-service-config
+
+          # The Secret is wired one key at a time (unlike the ConfigMap's
+          # envFrom) so it's obvious from this file alone exactly which
+          # sensitive values this Pod receives, instead of silently
+          # importing everything a Secret happens to contain.
+          env:
+            - name: FAKE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: hello-service-secret
+                  key: FAKE_API_KEY
+
           # Resource requests/limits: the scheduler uses "requests" to
           # decide which node can fit this Pod; "limits" caps what the
           # container can actually consume. Small numbers here because

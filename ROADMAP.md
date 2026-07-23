@@ -239,12 +239,12 @@ forever. **Milestone:** your app runs as 2 self-healing Pods; kill one and watch
 
 ---
 
-### Phase 5 — Configuration & secrets, done right
-- [ ] Move the greeting message + log level into a **ConfigMap**
-- [ ] Add a dummy **Secret** (e.g. a fake API key) and inject it as an env var
-- [ ] Confirm you can change config **without rebuilding the image** (edit ConfigMap → restart rollout)
-- [ ] **Tests:** regression script — change the ConfigMap value, `kubectl rollout restart`, poll the endpoint until the new value appears, assert no image rebuild happened
-- [ ] **Docs:** `docs/phase-5-config-and-secrets.md`
+### Phase 5 — Configuration & secrets, done right  ✅
+- [x] Move the greeting message + log level into a **ConfigMap**
+- [x] Add a dummy **Secret** (e.g. a fake API key) and inject it as an env var
+- [x] Confirm you can change config **without rebuilding the image** (edit ConfigMap → restart rollout)
+- [x] **Tests:** regression script — change the ConfigMap value, `kubectl rollout restart`, poll the endpoint until the new value appears, assert no image rebuild happened
+- [x] **Docs:** `docs/phase-5-config-and-secrets.md`
 
 **You'll learn:** the 12-factor principle of externalized config; why secrets live outside the image.
 **Milestone:** change a message with zero code changes and zero image rebuilds.
@@ -424,7 +424,7 @@ correct, well-understood, well-tested template you can reuse for real services.*
 ---
 
 ### Next step
-Phases 0–4 are complete: the repo scaffold, the Spring Boot app, its Docker image, a local `kind`
-Kubernetes cluster, and the app running as 2 self-healing Pods behind a Service all exist and pass
-their gates. Next up is **Phase 5** — move config into a ConfigMap and a Secret, and prove you can
-change the greeting message with zero image rebuilds.
+Phases 0–5 are complete: the repo scaffold, the Spring Boot app, its Docker image, a local `kind`
+Kubernetes cluster, the app running as 2 self-healing Pods behind a Service, and externalized
+config/secrets via a ConfigMap and a Secret all exist and pass their gates. Next up is **Phase 6** —
+install the NGINX Ingress Controller and reach the app by a real hostname instead of port-forwarding.
